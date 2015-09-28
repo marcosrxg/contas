@@ -9,7 +9,7 @@
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	$pdo = new PDO('mysql:host=localhost;dbname=contas','root','');
+	$pdo = new PDO('mysql:host=localhost;dbname=contas','bcont','contas');
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$stmt = $pdo->prepare('INSERT INTO paciente (dsPessoaFisica, cdSexo, dtNascimento, nrCpf) VALUES(:nome, :sexo, :datenc, :cpf)'); 
 	$stmt->execute(array( ':nome' => $_POST['nome'], ':sexo' => $_POST['sexo'], ':datenc' => $_POST['datenc'], ':cpf' => $_POST['cpf']));

@@ -9,9 +9,9 @@
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	$pdo = new PDO('mysql:host=localhost;dbname=contas','root','');
+	$pdo = new PDO('mysql:host=localhost;dbname=contas','bcont','contas');
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$stmt = $pdo->prepare('INSERT INTO tipo_atendimento (dsTipoAtendimento) VALUES(:tp_atend)'); 
+	$stmt = $pdo->prepare('INSERT INTO tipoatendimento (dsTipoAtendimento) VALUES(:tp_atend)'); 
 	$stmt->execute(array( ':tp_atend' => $_POST['tp_atend'] ));
 }
 ?>

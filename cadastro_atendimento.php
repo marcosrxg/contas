@@ -1,4 +1,6 @@
-﻿<!doctype html>
+﻿<?php $PDO = new PDO('mysql:host=localhost;dbname=contas','bcont','contas'); ?>
+<?php $PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); ?>
+<!doctype html>
 <html lang = "pt-br">
 <head>
 <meta charset = "UTF-8">
@@ -8,11 +10,19 @@
 <h1>Cadastro de Atendimento</h1>
 
 <?php
-	$pdo = new PDO('mysql:host=localhost;dbname=contas','root','');
-	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	$stmt = $pdo->prepare('INSERT INTO atendimento (nrAtendimento, cdPaciente , cdTipoAtendimento, cdConvenio, dtEntrada, dtAlta, vlTotalConta) VALUES(:atend, :nome, :tipoatend, :convenio, :dtEntrada, :dtAlta, :valor)'); 
-	$stmt->execute(array( ':atend' => $_POST['atend'],':nome' => $_POST['nome'], ':tipoatend' => $_POST['tipoatend'], ':convenio' => $_POST['convenio'], ':dataentrada' => $_POST['dataentrada'],':dataalta' => $_POST['dataalta'], ':valor' => $_POST['valor'] ));
+	
+	if($_POST['nome'] == 0){
+		$lsErro = "Selecione o paciente.";
+	} else if($_POST['tipoatend'] == 0){
+		$lsErro = "Selecione o tipo de atendimento.";
+	} else if($_POST['convenio'] == 0){
+		$lsErro = "Selecione o convênio.";
+	} else {
+		$stmt = $PDO->prepare('INSERT INTO atendimento (nrAtendimento, cdPaciente , cdTipoAtendimento, cdConvenio, dtEntrada, dtAlta, vlTotalConta) VALUES(:atend, :nome, :tipoatend, :convenio, :dtEntrada, :dtAlta, :valor)'); 
+		$stmt->execute(array( ':atend' => $_POST['atend'],':nome' => $_POST['nome'], ':tipoatend' => $_POST['tipoatend'], ':convenio' => $_POST['convenio'], ':dtEntrada' => $_POST['dataentrada'],':dtAlta' => $_POST['dataalta'], ':valor' => $_POST['valor'] ));
+	}
 }
 ?>
 
@@ -23,43 +33,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <label>Nome: </label>
 <select name="nome">
 <?php
-	$sql1 = $pdo->prepare('SELECT dsPessoaFisica FROM paciente');
+	$sql1 = $PDO->prepare('SELECT * FROM paciente');
 	$sql1->execute();
-      while($pdo = $sql1->fetch())
-		{
-          echo '<option value="'.$pdo['dsPessoaFisica'].'">'.$pdo['dsPessoaFisica'].'</option>';    
-		}
-?> 
+?>
+	<option value="0">Selecione um paciente...</option>
+<?php while($laPaciente = $sql1->fetch()): ?>
+  <option value="<?php echo $laPaciente['cdPessoaFisica']?>"><?php echo $laPaciente['dsPessoaFisica']?></option> 
+<?php endwhile; ?>
 </select> 
 <br>
 <br>
 <label>Tipo de Atendiemnto: </label>
 <select name="tipoatend">
+
 <?php
-	$pdo = new PDO('mysql:host=localhost;dbname=contas','root','');
-	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sql2 = $pdo->prepare('SELECT dsTipoAtendimento FROM tipo_atendimento');
+	$sql2 = $PDO->prepare('SELECT * FROM tipoatendimento');
 	$sql2->execute();
-      while($pdo = $sql2->fetch())
-		{
-          echo '<option value="'.$pdo['dsTipoAtedntimento'].'">'.$pdo['dsTipoAtendimento'].'</option>';    
-		}
-?> 
+?>
+	<option value="0">Selecione um tipo de atendimento...</option>
+<?php while($laTipoAtendimento = $sql2->fetch()): ?>
+		<option value="<?php $laTipoAtendimento['cdTipoAtendimento']?>"><?php $laTipoAtendimento['dsTipoAtendimento']?></option>';    
+<?php endwhile; ?>		
 </select> 
 <br>
 <br>
 <label>Convênio: </label>
 <select name="convenio">
+<option value="0">Selecione um convênio...</option>
 <?php
-	$pdo = new PDO('mysql:host=localhost;dbname=contas','root','');
-	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sql3 = $pdo->prepare('SELECT dsConvenio FROM convenio');
+	$sql3 = $PDO->prepare('SELECT * FROM convenio');
 	$sql3->execute();
-      while($pdo = $sql3->fetch())
-		{
-          echo '<option value="'.$pdo['dsConvenio'].'">'.$pdo['dsConvenio'].'</option>';    
-		}
-?> 
+?>
+<?php while($laConveio = $sql3->fetch()): ?>
+		<option value="<?php $laConveio['cdConvenio']?>"><?php $laConveio['dsConvenio']?></option>';    
+<?php endwhile; ?> 
 </select> 
 <br>
 <br>
@@ -76,6 +83,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <br>
 <br>
 <a href="index.html" title="Pagina Inicial" >Voltar</a>
+
+<style>
+.error-msg{
+	padding: 12px;
+    background-color: #F30707;
+    color: #FFF;
+    font-size: 18px;
+    border-radius: 9px;
+}
+</style>
+
+
+<?php if(!empty($lsErro)): ?>
+	<p class="error-msg"><?php echo $lsErro?></p>
+<?php endif; ?>
 </form>
 </body>
 </html>
