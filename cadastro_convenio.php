@@ -9,7 +9,7 @@
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	$pdo = new PDO('mysql:host=localhost;dbname=conta','root','contas');
+	$pdo = new PDO('mysql:host=localhost;dbname=u629263801_conta','u629263801_root','contas');
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$stmt = $pdo->prepare('INSERT INTO convenio (dsConvenio) VALUES(:convenio)'); 
 	$stmt->execute(array( ':convenio' => $_POST['convenio'] ));
