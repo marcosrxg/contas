@@ -8,7 +8,7 @@
 <h1>Lista Atendimento</h1>
 
 <?php
-	$pdo = new PDO('mysql:host=localhost;dbname=conta','root','contas');
+	$pdo = new PDO('mysql:host=localhost;dbname=u629263801_conta','u629263801_root','contas');
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$stmt = $pdo->prepare('SELECT a.nrAtendimento, 
 								  p.dsPessoaFisica, 
