@@ -1,4 +1,4 @@
-﻿<?php $PDO = new PDO('mysql:host=localhost;dbname=contas','bcont','contas'); ?>
+﻿<?php $PDO = new PDO('mysql:host=localhost;dbname=conta','root','contas'); ?>
 <?php $PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); ?>
 <!doctype html>
 <html lang = "pt-br">
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 	<option value="0">Selecione um tipo de atendimento...</option>
 <?php while($laTipoAtendimento = $sql2->fetch()): ?>
-		<option value="<?php $laTipoAtendimento['cdTipoAtendimento']?>"><?php $laTipoAtendimento['dsTipoAtendimento']?></option>';    
+		<option value="<?php echo $laTipoAtendimento['cdTipoAtendimento']?>"><?php echo $laTipoAtendimento['dsTipoAtendimento']?></option>';    
 <?php endwhile; ?>		
 </select> 
 <br>
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$sql3->execute();
 ?>
 <?php while($laConveio = $sql3->fetch()): ?>
-		<option value="<?php $laConveio['cdConvenio']?>"><?php $laConveio['dsConvenio']?></option>';    
+		<option value="<?php echo $laConveio['cdConvenio']?>"><?php echo $laConveio['dsConvenio']?></option>';    
 <?php endwhile; ?> 
 </select> 
 <br>
