@@ -23,6 +23,7 @@ if(count($dados)> 0) {
 	$arquivo = "contas.xml";
 	$ponteiro = fopen($arquivo, "w");
 	fwrite($ponteiro, "<?xml version='1.0' encoding='UTF-8'?>\n");
+	fwrite($ponteiro, "<?xml-stylesheet type='text/xsl' href='conta.xsl'?>\n");
 	fwrite($ponteiro, "<guia>\n");
 
 foreach($dados as $dado){
