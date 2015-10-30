@@ -2,20 +2,20 @@
 $pdo = new PDO('mysql:host=localhost;dbname=u629263801_conta','u629263801_root','contas');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$stmt = $pdo->prepare('SELECT 	 a.nrAtendimento, 
-								 p.dsPessoaFisica, 
-                                 tp.dsTipoAtendimento, 
-                                 c.dsConvenio, 
-                                 a.dtEntrada, 
-                                 a.dtAlta, 
-                                 a.vlTotalConta
-                            FROM atendimento a, 
-                                 paciente p, 
-                                 tipoatendimento tp, 
-                                 convenio c
-                            WHERE a.cdPaciente = cdPessoaFisica
-                            AND a.cdTipoAtendimento = tp.cdTipoAtendimento
-                            AND a.cdConvenio = c.cdConvenio'); 
+$stmt = $pdo->prepare('SELECT 	a.nrAtendimento, 
+				p.dsPessoaFisica, 
+                                tp.dsTipoAtendimento, 
+                                c.dsConvenio, 
+                                a.dtEntrada, 
+                                a.dtAlta, 
+                                a.vlTotalConta
+                        FROM 	atendimento a, 
+                                paciente p, 
+                                tipoatendimento tp, 
+                                convenio c
+                        WHERE 	a.cdPaciente = p.cdPessoaFisica
+                        AND 	a.cdTipoAtendimento = tp.cdTipoAtendimento
+                        AND 	a.cdConvenio = c.cdConvenio'); 
 $stmt->execute();
 $dados = $stmt->fetchAll();
 
