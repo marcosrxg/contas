@@ -1,37 +1,166 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <title>Cadastro de Contas</title>
+<link href="jquery-ui.css" rel="stylesheet">
+<style>
+	body{
+		font: 62.5% "Trebuchet MS", sans-serif;
+		margin: 50px;
+	}
+	.demoHeaders {
+		margin-top: 2em;
+	}
+	#dialog-link {
+		padding: .4em 1em .4em 20px;
+		text-decoration: none;
+		position: relative;
+	}
+	#dialog-link span.ui-icon {
+		margin: 0 5px 0 0;
+		position: absolute;
+		left: .2em;
+		top: 50%;
+		margin-top: -8px;
+	}
+	#icons {
+		margin: 0;
+		padding: 0;
+	}
+	#icons li {
+		margin: 2px;
+		position: relative;
+		padding: 4px 0;
+		cursor: pointer;
+		float: left;
+		list-style: none;
+	}
+	#icons span.ui-icon {
+		float: left;
+		margin: 0 4px;
+	}
+	.fakewindowcontain .ui-widget-overlay {
+		position: absolute;
+	}
+	select {
+		width: 200px;
+	}
+</style>
 </head>
 <body>
-<h1>Cadastro de Contas</h1>
-<br>
-<br>
-<a href="cadastro_convenio.php" title="Convenio" >Cadatro de Convênio</a>
-<br>
-<br>
-<a href="cadastro_tipo_atendimento.php" title="Tipo Atendimento" >Cadastro Tipo de Atendimento</a>
-<br>
-<br>
-<a href="cadastro_paciente.php" title="Paciente" >Cadastro de Paciente</a>
-<br>
-<br>
-<a href="cadastro_atendimento.php" title="Atendimento" >Cadastro de Atendimento</a>
-<br>
-<br>
-<a href="lista_conv.php" title="Listar Convênios" >Listar Convênios</a>
-<br>
-<br>
-<a href="lista_tp.php" title="Listar Tipos de Atendimentos" >Listar Tipos de Atendimentos</a>
-<br>
-<br>
-<a href="lista_pac.php" title="Listar Pacientes" >Listar Pacientes</a>
-<br>
-<br>
-<a href="lista_atend.php" title="Listar Atendimentos" >Listar Atendimentos</a>
-<br>
-<br>
-<a href="gerar_xml.php" title="Gerar XML" >Gerar XML</a>
+	<h1 class="demoHeaders">Cadastro de Contas</h1>
+	<div id="dialog" title="Lembrete">
+		<p>O site foi criado para cadastro de contas de hospitais, não esqueça de ver as informações.</p>
+	</div>
+	<ul style="width:150px; height:130px" id="menu">
+		<li>Convênio
+			<ul style="width:150px; height:50px">
+				<li><a href="cadastro_convenio.php" title="Convenio" >Cadastro de Convênio</a></li>
+				<br>
+				<li><a href="lista_conv.php" title="Listar Convênios" >Listar Convênios</a></li>
+			</ul>
+		</li>
+		<br>
+		<li>Tipo de Atendimento
+			<ul style="width:200px; height:50px">
+				<li><a href="cadastro_tipo_atendimento.php" title="Tipo Atendimento" >Cadastro Tipo de Atendimento</a></li>
+				<br>
+				<li><a href="lista_tp.php" title="Listar Tipos de Atendimentos" >Listar Tipos de Atendimentos</a></li>
+			</ul>
+		</li>
+		<br>
+		<li>Paciente
+			<ul style="width:150px; height:50px">
+				<li><a href="cadastro_paciente.php" title="Paciente" >Cadastro de Paciente</a></li>
+				<br>
+				<li><a href="lista_pac.php" title="Listar Pacientes" >Listar Pacientes</a></li>
+			</ul>
+		</li>
+		<br>
+		<li>Atendimento
+			<ul style="width:150px; height:50px">
+				<li><a href="cadastro_atendimento.php" title="Atendimento" >Cadastro de Atendimento</a></li>
+				<br>
+				<li><a href="lista_atend.php" title="Listar Atendimentos" >Listar Atendimentos</a></li>
+			</ul>
+		</li>
+		<br>
+		<li>XML
+			<ul style="width:150px;">
+				<li><a href="novo.php" title="XML" >Gerar XML</a></li>
+			</ul>
+		</li>
+	</ul>
+	
+	<h2 class="demoHeaders">Informações</h2>
+	<div id="tabs">
+		<ul>
+			<li><a href="#tabs-1">Convênio</a></li>
+			<li><a href="#tabs-2">Tipo de Atendimento</a></li>
+			<li><a href="#tabs-3">Paciente</a></li>
+			<li><a href="#tabs-4">Atendimento</a></li>
+			<li><a href="#tabs-5">XML</a></li>
+		</ul>
+		<div id="tabs-1"><p>No menu Convênio você irá encontrar dois submenu Cadastro de Convênio e Listar Convênios.</p>
+						<p>- Cadastro de Convênio:</p> 
+							<p>Está página e bem simples o próprio nome é auto explicatico, onde irá cadastrar os convênios no qual a empresa trabalha.</p>
+							<br><br>
+						<p>- Listar convênios:</p> 
+							<p>Nestá pagina lhe oferecerá um listagem dos convênios cadastrados.</p>
+		</div>
+		<div id="tabs-2"><p>No menu Tipo de Atendimento você irá encontrar dois submenu Cadastro Tipo de Atendimento e Listar Tipo de Atendimento.</p>
+						<p>- Cadastro Tipo de Atendimento:</p>
+							<p>Está página e bem simples o próprio nome é auto explicatico, onde irá cadastrar os Tipo de Atendimento no qual a empresa trabalha.</p>
+							<br><br>
+						<p>- Listar Tipo de Atendimento:</p> 
+							<p>Nestá pagina lhe oferecerá um listagem dos Tipos de Atendimentos cadastrados.</p>
+		</div>
+		<div id="tabs-3"><p>No menu Paciente você irá encontrar dois submenu Cadastro de Paciente e Listar Paciente.</p>
+						<p>- Cadastro de Paciente:</p> 
+							<p>Está página os campos são mais espeficios onde irá cadastrar:</p> 
+							<p>Nome</p> 
+							<p>Sexo</p>
+							<p>Data de nascimento</p> 
+							<p>CPF lembrando que o CPF tem que ser digitado assim como exemplo: 000.000.000.00 </p>
+							<br><br>
+						<p>- Listar Paciente: </p>
+							<p>Nestá pagina lhe oferecerá um listagem dos Pacientes cadastrados.</p>
+		</div>
+		<div id="tabs-4"><p>No menu Atendimento você irá encontrar dois submenu Cadastro de Atendimento e Listar Atendimento.</p>
+						<p>- Cadastro de Atendimento:</p> 
+							<p>Está página é a principal, onde o cadastro e mais completo, oferecendo os seguintes campos:</p> 
+							<p>Atendimento onde irá digitar o número do atendimento desejado</p>
+							<p>Selecionar o nome do paciente</p>
+							<p>Tipo de atendimento exemplo: pronto socorro ou internação e etc.</p>
+							<p>Convênio que criou</p>
+							<p>Data de entrada</p>
+							<p>Data da alta quando o paciente saiu</p>
+							<p>Valor total da conta.</p>
+							<br><br>
+						<p>- Listar Atendimento:</p> 
+							<p>Nestá pagina lhe oferecerá um listagem dos Atendimentos cadastrados.</p>
+		</div>
+		<div id="tabs-5">Na aba XML oferece a geração de um arquivo de XML usado para enviar as contas para convênio nesse caso, ele mostrará uma listagem com todos os atendimentos.</div>
+	</div>
+	<script src="external/jquery/jquery.js"></script>
+	<script src="jquery-ui.js"></script>
+	<script>
+		$( "#menu" ).menu();
+		
+		$( "#tabs" ).tabs();
+		
+		$( "#dialog" ).dialog();
+		
+		// Hover states on the static widgets
+		$( "#dialog-link, #icons li" ).hover(
+			function() {
+				$( this ).addClass( "ui-state-hover" );
+			},
+			function() {
+				$( this ).removeClass( "ui-state-hover" );
+			}
+		);
+	</script>
 </body>
 </html>
